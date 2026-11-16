@@ -141,6 +141,27 @@ app_license = "mit"
 # has_permission = {
 # 	"Event": "frappe.desk.doctype.event.event.has_permission",
 # }
+permission_query_conditions = {
+    "Item": "songa_multi_tenancy.permissions.item_query",
+    "Item Group": "songa_multi_tenancy.permissions.item_group_query",
+    "Customer": "songa_multi_tenancy.permissions.customer_query",
+    "Supplier": "songa_multi_tenancy.permissions.supplier_query",
+    "Brand": "songa_multi_tenancy.permissions.brand_query",
+    "Price List": "songa_multi_tenancy.permissions.price_list_query",
+    "Item Price": "songa_multi_tenancy.permissions.item_price_query",
+    "User": "songa_multi_tenancy.permissions.user_query",
+}
+
+has_permission = {
+    "Item": "songa_multi_tenancy.permissions.tenant_has_permission",
+    "Item Group": "songa_multi_tenancy.permissions.tenant_has_permission",
+    "Customer": "songa_multi_tenancy.permissions.tenant_has_permission",
+    "Supplier": "songa_multi_tenancy.permissions.tenant_has_permission",
+    "Brand": "songa_multi_tenancy.permissions.tenant_has_permission",
+    "Price List": "songa_multi_tenancy.permissions.tenant_has_permission",
+    "Item Price": "songa_multi_tenancy.permissions.tenant_has_permission",
+    "User": "songa_multi_tenancy.permissions.user_has_permission",
+}
 
 # DocType Class
 # ---------------
@@ -264,3 +285,65 @@ app_license = "mit"
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 
+fixtures = [
+	{
+        "dt": "DocType", 
+        "filters": [
+            ["module", "=", "Songa Multi Tenancy"]
+        ]
+    },
+	{
+        "dt": "Custom Field", 
+        "filters": [
+            ["module", "=", "Songa Multi Tenancy"]
+        ]
+    },
+	{
+        "dt": "Property Setter", 
+        "filters": [
+            ["module", "=", "Songa Multi Tenancy"]
+        ]
+    },
+	{
+        "dt": "Client Script", 
+        "filters": [
+            ["module", "=", "Songa Multi Tenancy"]
+            ]
+    },
+	{
+        "dt": "Report", 
+        "filters": [
+            ["module", "=", "Songa Multi Tenancy"]
+        ]
+    },
+	{
+        "dt": "Notification", 
+        "filters": [
+            ["module", "=", "Songa Multi Tenancy"]
+        ]
+    },
+	{
+        "dt": "Workspace", 
+        "filters": [
+            ["module", "=", "Songa Multi Tenancy"]
+        ]
+    },
+	{
+        "dt": "Dashboard Chart", 
+        "filters": [
+            ["module", "=", "Songa Multi Tenancy"]
+        ]
+    },
+	{
+        "dt": "Number Card", 
+        "filters": [
+            ["module", "=", "Songa Multi Tenancy"]
+        ]
+    },
+    {
+        "dt": "Custom Field",
+        "filters": [
+            ["dt", "=", "Contact"]
+        ],
+    }
+]
