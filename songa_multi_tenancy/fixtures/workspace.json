@@ -1,1 +1,175 @@
-[]
+[
+ {
+  "charts": [
+   {
+    "chart_name": "Tenant Provisioning",
+    "label": "Tenant Provisioning",
+    "parent": "Tenants",
+    "parentfield": "charts",
+    "parenttype": "Workspace"
+   },
+   {
+    "chart_name": "Tenants Sign Ups",
+    "label": "Tenants Sign Ups",
+    "parent": "Tenants",
+    "parentfield": "charts",
+    "parenttype": "Workspace"
+   }
+  ],
+  "content": "[{\"id\":\"QFaBnn4zlb\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Multi Tenants</span>\",\"col\":12}},{\"id\":\"bKklDTMxQl\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"Cxr1pwLma0\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Active Tenants\",\"col\":4}},{\"id\":\"DWNPKNvmoE\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Complete Provisions\",\"col\":4}},{\"id\":\"F1ki-wzG__\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Failed Provisions\",\"col\":4}},{\"id\":\"gvWPmHWybE\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"lGjlMxxIBm\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Multi Tenancy Administrators\",\"col\":3}},{\"id\":\"HlEwy8GjXW\",\"type\":\"spacer\",\"data\":{\"col\":5}},{\"id\":\"a4lu0M6wkq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"All Tenant Users\",\"col\":3}},{\"id\":\"6rh7mOaIeV\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Tenancy Provisioning\",\"col\":3}},{\"id\":\"s13-BsLEj7\",\"type\":\"spacer\",\"data\":{\"col\":5}},{\"id\":\"8i1-T7-eY1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Failed Provisions\",\"col\":3}},{\"id\":\"tF7UUtA24Y\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Tenants\",\"col\":3}},{\"id\":\"XNN-DeWDf4\",\"type\":\"spacer\",\"data\":{\"col\":5}},{\"id\":\"0dVJaVsVhA\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Successful Provisions\",\"col\":3}},{\"id\":\"OCzv2LLgn6\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"Volxnyun0l\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Reports</span>\",\"col\":12}},{\"id\":\"HVV9A6RdZR\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"ndRp0tiUyM\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Tenant Provisioning\",\"col\":12}},{\"id\":\"upaD_D7lIr\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Tenants Sign Ups\",\"col\":12}}]",
+  "custom_blocks": [],
+  "docstatus": 0,
+  "doctype": "Workspace",
+  "for_user": "",
+  "hide_custom": 0,
+  "icon": "share-people",
+  "indicator_color": "",
+  "is_hidden": 0,
+  "label": "Tenants",
+  "links": [],
+  "modified": "2026-11-16 23:01:04.300044",
+  "module": null,
+  "name": "Tenants",
+  "number_cards": [
+   {
+    "label": "Active Tenants",
+    "number_card_name": "All Tenants (Active)",
+    "parent": "Tenants",
+    "parentfield": "number_cards",
+    "parenttype": "Workspace"
+   },
+   {
+    "label": "Complete Provisions",
+    "number_card_name": "Tenant Provisioning (Completed)",
+    "parent": "Tenants",
+    "parentfield": "number_cards",
+    "parenttype": "Workspace"
+   },
+   {
+    "label": "Failed Provisions",
+    "number_card_name": "Tenants Provisioning (Failed)",
+    "parent": "Tenants",
+    "parentfield": "number_cards",
+    "parenttype": "Workspace"
+   }
+  ],
+  "parent_page": "",
+  "public": 1,
+  "quick_lists": [],
+  "restrict_to_domain": null,
+  "roles": [
+   {
+    "parent": "Tenants",
+    "parentfield": "roles",
+    "parenttype": "Workspace",
+    "role": "System Manager"
+   }
+  ],
+  "sequence_id": 52.0,
+  "shortcuts": [
+   {
+    "color": "Grey",
+    "doc_view": "List",
+    "format": null,
+    "icon": null,
+    "kanban_board": null,
+    "label": "All Tenant Users",
+    "link_to": "Tenant User",
+    "parent": "Tenants",
+    "parentfield": "shortcuts",
+    "parenttype": "Workspace",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": "[]",
+    "type": "DocType",
+    "url": null
+   },
+   {
+    "color": "Green",
+    "doc_view": "List",
+    "format": null,
+    "icon": null,
+    "kanban_board": null,
+    "label": "Tenants",
+    "link_to": "Tenant",
+    "parent": "Tenants",
+    "parentfield": "shortcuts",
+    "parenttype": "Workspace",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": "[]",
+    "type": "DocType",
+    "url": null
+   },
+   {
+    "color": "Red",
+    "doc_view": "List",
+    "format": null,
+    "icon": null,
+    "kanban_board": null,
+    "label": "Failed Provisions",
+    "link_to": "Tenant Provisioning",
+    "parent": "Tenants",
+    "parentfield": "shortcuts",
+    "parenttype": "Workspace",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": "[[\"Tenant Provisioning\",\"status\",\"=\",\"Failed\",false]]",
+    "type": "DocType",
+    "url": null
+   },
+   {
+    "color": "Green",
+    "doc_view": "List",
+    "format": null,
+    "icon": null,
+    "kanban_board": null,
+    "label": "Tenancy Provisioning",
+    "link_to": "Tenant Provisioning",
+    "parent": "Tenants",
+    "parentfield": "shortcuts",
+    "parenttype": "Workspace",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": "[]",
+    "type": "DocType",
+    "url": null
+   },
+   {
+    "color": "Green",
+    "doc_view": "List",
+    "format": null,
+    "icon": null,
+    "kanban_board": null,
+    "label": "Successful Provisions",
+    "link_to": "Tenant Provisioning",
+    "parent": "Tenants",
+    "parentfield": "shortcuts",
+    "parenttype": "Workspace",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": "[[\"Tenant Provisioning\",\"status\",\"=\",\"Completed\",false]]",
+    "type": "DocType",
+    "url": null
+   },
+   {
+    "color": "Green",
+    "doc_view": "List",
+    "format": null,
+    "icon": null,
+    "kanban_board": null,
+    "label": "Multi Tenancy Administrators",
+    "link_to": "Multi Tenancy Administrator",
+    "parent": "Tenants",
+    "parentfield": "shortcuts",
+    "parenttype": "Workspace",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": "[]",
+    "type": "DocType",
+    "url": null
+   }
+  ],
+  "title": "Tenants"
+ }
+]

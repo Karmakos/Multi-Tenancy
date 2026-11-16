@@ -325,7 +325,7 @@ fixtures = [
 	{
         "dt": "Workspace", 
         "filters": [
-            ["module", "=", "Songa Multi Tenancy"]
+            ["name", "=", "Tenants"]
         ]
     },
 	{
