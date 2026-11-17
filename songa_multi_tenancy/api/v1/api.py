@@ -65,12 +65,12 @@ def register_tenant():
             as_dict=True,
         )
 
-        # Idempotency: don't create another provisioning request.
+        # Idempotency, no another provisioning request.
         if existing_provision:
             return api_response(
                 True,
                 "A provisioning request already exists.",
-                200,
+                409,
                 {
                     "Songa_tenant_id": songa_tenant_id,
                     "provisioning_id": existing_provision.provisioning_id,
@@ -170,7 +170,7 @@ def get_tenant_provisioning_status(
         frappe.local.response["http_status_code"] = 404
         return api_response(
             False,
-            "Provisioning request not found.",
+            "Provisioning Request Not Found.",
             404,
         )
 
