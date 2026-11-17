@@ -1,0 +1,148 @@
+{
+  "info": {
+    "_postman_id": "b7c772ab-16a4-42d2-a260-5e52bbda4a2c",
+    "name": "Songa Multi Tenancy",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "27011734"
+  },
+  "item": [
+    {
+      "name": "Register Tenant",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{songa_access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"Songa_tenant_id\": \"SONGA-TENANT-02\",\r\n  \"company\": \"Acme Corp Kenya Plc\",\r\n  \"tenant_category\": \"Co-operative\",\r\n  \"admin\": {\r\n    \"email\": \"admin@acmecorpplc.com\",\r\n    \"phone\": \"+2541234567890\",\r\n    \"full_name\": \"John Mwangi\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.api.register_tenant",
+          "host": [
+            "{{Website}}"
+          ],
+          "path": [
+            "api",
+            "method",
+            "songa_multi_tenancy.api.v1.api.register_tenant"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register Tenant Copy",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{local_songa_access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"Songa_tenant_id\": \"SONGA-TENANT-0927\",\r\n  \"company\": \"Acme Corp Kinya Pilic\",\r\n  \"tenant_category\": \"Co-operative\",\r\n  \"admin\": {\r\n    \"email\": \"admin@acmecoreppilc.com\",\r\n    \"phone\": \"+2541234567890\",\r\n    \"full_name\": \"John Mwangi\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{local_website}}/api/method/songa_multi_tenancy.api.v1.api.register_tenant",
+          "host": [
+            "{{local_website}}"
+          ],
+          "path": [
+            "api",
+            "method",
+            "songa_multi_tenancy.api.v1.api.register_tenant"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Check Tenant Status",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{songa_access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"Songa_tenant_id\": \"SONGA-TENANT-01\",\r\n  \"provisioning_id\": \"fd4c520eba1e1ed288e8\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.api.get_tenant_provisioning_status",
+          "host": [
+            "{{Website}}"
+          ],
+          "path": [
+            "api",
+            "method",
+            "songa_multi_tenancy.api.v1.api.get_tenant_provisioning_status"
+          ],
+          "query": [
+            {
+              "key": "Songa_tenant_id",
+              "value": "SONGA-TENANT-01",
+              "disabled": true
+            },
+            {
+              "key": "provisioning_id",
+              "value": "fd4c520eba1e1ed288e8",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "songa_access_token",
+      "value": ""
+    },
+    {
+      "key": "Website",
+      "value": ""
+    },
+    {
+      "key": "local_website",
+      "value": ""
+    },
+    {
+      "key": "local_songa_access_token",
+      "value": ""
+    }
+  ]
+}
