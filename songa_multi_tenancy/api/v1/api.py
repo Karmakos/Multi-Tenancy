@@ -131,12 +131,12 @@ def register_tenant():
 
         return api_response(
             True,
-            "Tenancy Provisioning initiated successfully",
+            "Tenancy Provisioning Queued successfully",
             202,
             {
                 "Songa_tenant_id": songa_tenant_id,
                 "provisioning_id": provisioning_id,
-                "status": "In Progress",
+                "status": "Queued",
             },
         )
 

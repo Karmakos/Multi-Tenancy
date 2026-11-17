@@ -189,7 +189,7 @@ def create_company_administrator_role_profile():
     finally:
         frappe.flags.in_install = previous_in_install
 
-    frappe.commit()
+    frappe.db.commit()
 
     LOGGER.info(
         "%s Role Profile '%s': %s roles added, %s roles removed.",

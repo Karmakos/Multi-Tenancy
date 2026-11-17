@@ -2,8 +2,7 @@
 import frappe
 from frappe import _
 from frappe.utils import now_datetime
-import songa_multi_tenancy.api.v1.utils as generate_temporary_password
-
+from songa_multi_tenancy.patches.v1.adoption.adopt_existing_companies import create_company_administrator_role_profile
 
 ROLE_PROFILE = "Company Administrator"
 
@@ -295,9 +294,11 @@ def assign_company_administrator_role(provision, admin_email):
         frappe.throw(_("Administrator User has not been created."))
 
     if not frappe.db.exists("Role Profile", ROLE_PROFILE):
-        frappe.throw(
-            _("Role Profile {0} does not exist.").format(ROLE_PROFILE)
-        )
+        create_company_administrator_role_profile()
+        frappe.log_error(
+                message=frappe.get_traceback(), 
+                title=_("Role Profile {0} does not exist.").format(ROLE_PROFILE)
+            )
 
     user = frappe.get_doc("User", admin_email)
     user.role_profile_name = ROLE_PROFILE
