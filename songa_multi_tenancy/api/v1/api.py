@@ -183,7 +183,9 @@ def get_tenant_provisioning_status(
     if provision.status == "Failed":
         frappe.local.response["http_status_code"] = 500
 
-        data["error_reason"] = provision.error_message
+        for step in provision.progress:
+            if step.error_message:
+                data["error_reason"] = step.error_message
 
         return api_response(
             False,
