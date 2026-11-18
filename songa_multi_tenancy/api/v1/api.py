@@ -28,7 +28,7 @@ def register_tenant():
     try:
         payload = frappe.parse_json(frappe.request.get_json())
 
-        songa_tenant_id = payload.get("Songa_tenant_id")
+        songa_tenant_id = payload.get("songa_tenant_id")
         company_name = payload.get("company")
         tenant_category = payload.get("tenant_category")
         admin = payload.get("admin") or {}
@@ -36,6 +36,9 @@ def register_tenant():
         email = (admin.get("email") or "").strip().lower()
         phone = admin.get("phone")
         full_name = (admin.get("full_name") or "").strip()
+
+        modules = payload.get("selected_songa_modules") or []
+        
 
         # Validate required fields.
         if not all([
