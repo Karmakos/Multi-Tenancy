@@ -322,28 +322,28 @@ fixtures = [
             ["module", "=", "Songa Multi Tenancy"]
         ]
     },
-	{
-        "dt": "Workspace", 
-        "filters": [
-            ["name", "=", "Tenants"]
-        ]
-    },
-	{
-        "dt": "Dashboard Chart", 
-        "filters": [
-            ["module", "=", "Songa Multi Tenancy"]
-        ]
-    },
-	{
-        "dt": "Number Card", 
-        "filters": [
-            ["module", "=", "Songa Multi Tenancy"]
-        ]
-    },
     {
         "dt": "Custom Field",
         "filters": [
             ["dt", "=", "Contact"]
         ],
+    },
+    {
+        "dt": "Number Card",
+        "filters": [
+            ["document_type", "in", ["Tenant Provisioning", "Tenant"]]
+        ]
+    },
+    {
+        "dt": "Dashboard Chart",
+        "filters": [
+            ["document_type", "in", ["Tenant Provisioning", "Tenant"]]
+        ]
+    },
+	{
+        "dt": "Workspace", 
+        "filters": [
+            ["name", "=", "Tenants"]
+        ]
     }
 ]
