@@ -1,10 +1,18 @@
 
+from datetime import timedelta
+
 import frappe
 from frappe import _
 from frappe.utils import now_datetime
 from songa_multi_tenancy.patches.v1.adoption.adopt_existing_companies import create_company_administrator_role_profile
 
 ROLE_PROFILE = "Company Administrator"
+
+# A provisioning job stuck "In Progress" longer than this is considered
+# dead (worker died or timed out) and may be retried.
+STALE_AFTER = timedelta(minutes=5)
+
+LOGGER = frappe.logger("songa_multi_tenancy")
 
 PROVISIONING_STEPS = [
     "Create Company",
@@ -40,8 +48,23 @@ def process_tenant_provisioning(
         return
 
     if provision.status == "In Progress":
-        # Avoid concurrent execution of the same request.
-        return
+        # Avoid concurrent execution of the same request, unless the
+        # previous run is stale (worker died or timed out mid-run).
+        started_on = provision.started_on
+        is_stale = (
+            not started_on
+            or now_datetime() - started_on > STALE_AFTER
+        )
+
+        if not is_stale:
+            return
+
+        LOGGER.warning(
+            "Tenant Provisioning %s stuck In Progress since %s. "
+            "Treating as stale and retrying.",
+            provision.provisioning_id,
+            started_on,
+        )
 
     provision.status = "In Progress"
     provision.started_on = now_datetime()
@@ -84,7 +107,6 @@ def process_tenant_provisioning(
             lambda p: apply_company_user_permission(
                 p,
                 admin_email,
-                company_name
             ),
         )
 
@@ -94,7 +116,6 @@ def process_tenant_provisioning(
             5,
             lambda p: create_tenant(
                 p,
-                company_name,
                 admin_email,
             ),
         )
@@ -103,11 +124,7 @@ def process_tenant_provisioning(
         run_step(
             provisioning_name,
             6,
-            lambda p: activate_tenant(
-                p,
-                company_name, 
-                admin_email
-                ),
+            lambda p: activate_tenant(p),
         )
 
     except Exception:
@@ -256,6 +273,35 @@ def create_company(provision, company_name):
     provision.save(ignore_permissions=True)
 
 
+def _payload_value(provision, key):
+    """Read a value from the stored registration payload, if present."""
+
+    payload = provision.payload
+
+    if isinstance(payload, str):
+        try:
+            payload = frappe.parse_json(payload)
+        except Exception:
+            payload = None
+
+    if not isinstance(payload, dict):
+        return None
+
+    return payload.get(key)
+
+
+def _provision_company(provision, fallback=None):
+    """Return the provisioned Company docname, falling back to the payload name."""
+
+    return provision.company or fallback
+
+
+def _provision_administrator(provision, fallback=None):
+    """Return the provisioned Administrator email, falling back to the payload value."""
+
+    return provision.administrator or fallback
+
+
 def create_administrator(
     provision,
     email,
@@ -271,15 +317,17 @@ def create_administrator(
 
     names = full_name.split(maxsplit=1)
 
+    # Store digits only; User.phone is a plain Data field.
+    phone = "".join(char for char in str(phone or "") if char.isdigit())
+
     user = frappe.new_doc("User")
     user.email = email
     user.first_name = names[0]
     user.last_name = names[1] if len(names) > 1 else ""
-    user.phone = phone.replace("+", "")
+    user.phone = phone
     user.enabled = 1
     user.user_type = "System User"
     user.send_welcome_email = 0
-
 
     user.insert(ignore_permissions=True, ignore_mandatory=True)
 
@@ -295,18 +343,24 @@ def assign_company_administrator_role(provision, admin_email):
 
     if not frappe.db.exists("Role Profile", ROLE_PROFILE):
         create_company_administrator_role_profile()
-        frappe.log_error(
-                message=frappe.get_traceback(), 
-                title=_("Role Profile {0} does not exist.").format(ROLE_PROFILE)
-            )
+        LOGGER.info(
+            "Created missing Role Profile '%s'.",
+            ROLE_PROFILE,
+        )
 
     user = frappe.get_doc("User", admin_email)
     user.role_profile_name = ROLE_PROFILE
     user.save(ignore_permissions=True)
 
 
-def apply_company_user_permission(provision, admin_email, company_name):
+def apply_company_user_permission(provision, admin_email):
     """Restrict the administrator to the newly created Company."""
+
+    company_name = _provision_company(
+        provision,
+        _payload_value(provision, "company"),
+    )
+    admin_email = _provision_administrator(provision, admin_email)
 
     if not frappe.db.exists("User", admin_email) or not frappe.db.exists("Company", company_name):
         frappe.throw(
@@ -350,13 +404,21 @@ def apply_company_user_permission(provision, admin_email, company_name):
     )
 
 
-def create_tenant(provision, company_name, admin_email):
+def create_tenant(provision, admin_email):
     """Create and link the Tenant."""
 
     if provision.tenant:
         return
 
+    company_name = _provision_company(
+        provision,
+        _payload_value(provision, "company"),
+    )
+    admin_email = _provision_administrator(provision, admin_email)
+
     tenant_id = frappe.generate_hash(length=12)
+    while frappe.db.exists("Tenant", {"tenant_id": tenant_id}):
+        tenant_id = frappe.generate_hash(length=12)
 
     tenant = frappe.new_doc("Tenant")
     tenant.tenant_name = company_name
@@ -372,18 +434,20 @@ def create_tenant(provision, company_name, admin_email):
 
     provision.tenant = tenant.name
 
-    # Link all provisioning steps to the resulting Tenant.
-    # for row in provision.progress:
-    #     row.tenant = tenant.name
-
     provision.save(ignore_permissions=True)
 
 
-def activate_tenant(provision, company_name, admin_email):
+def activate_tenant(provision):
     """Activate the Tenant and complete provisioning."""
 
     if not provision.tenant:
         frappe.throw(_("Tenant has not been created."))
+
+    company_name = _provision_company(
+        provision,
+        _payload_value(provision, "company"),
+    )
+    admin_email = _provision_administrator(provision, None)
 
     if not company_name or not admin_email:
         frappe.throw(_("Company or Administrator is missing."))
