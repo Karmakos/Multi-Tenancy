@@ -90,6 +90,7 @@ app_license = "mit"
 
 # before_uninstall = "songa_multi_tenancy.uninstall.before_uninstall"
 after_uninstall = "songa_multi_tenancy.uninstall.after_uninstall"
+after_sync = "songa_multi_tenancy.install.after_sync"
 
 # Integration Setup
 # ------------------
@@ -329,37 +330,7 @@ doc_events = {
 
 fixtures = [
 	{
-        "dt": "DocType", 
-        "filters": [
-            ["module", "=", "Songa Multi Tenancy"]
-        ]
-    },
-	{
-        "dt": "Custom Field", 
-        "filters": [
-            ["module", "=", "Songa Multi Tenancy"]
-        ]
-    },
-	{
         "dt": "Property Setter", 
-        "filters": [
-            ["module", "=", "Songa Multi Tenancy"]
-        ]
-    },
-	{
-        "dt": "Client Script", 
-        "filters": [
-            ["module", "=", "Songa Multi Tenancy"]
-            ]
-    },
-	{
-        "dt": "Report", 
-        "filters": [
-            ["module", "=", "Songa Multi Tenancy"]
-        ]
-    },
-	{
-        "dt": "Notification", 
         "filters": [
             ["module", "=", "Songa Multi Tenancy"]
         ]

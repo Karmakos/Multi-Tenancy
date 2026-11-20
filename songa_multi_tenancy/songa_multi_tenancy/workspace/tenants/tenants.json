@@ -1,0 +1,104 @@
+{
+ "charts": [
+  {
+   "chart_name": "Successful Tenant Provisioning",
+   "label": "Successful Tenant Provisioning"
+  },
+  {
+   "chart_name": "Tenants Signups",
+   "label": "Tenants Sign Ups"
+  }
+ ],
+ "content": "[{\"id\":\"QFaBnn4zlb\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Multi Tenants</span>\",\"col\":12}},{\"id\":\"bKklDTMxQl\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"Cxr1pwLma0\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Active Tenants\",\"col\":4}},{\"id\":\"DWNPKNvmoE\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Complete Provisions\",\"col\":4}},{\"id\":\"F1ki-wzG__\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Failed Provisions\",\"col\":4}},{\"id\":\"gvWPmHWybE\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"lGjlMxxIBm\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Multi Tenancy Administrators\",\"col\":3}},{\"id\":\"HlEwy8GjXW\",\"type\":\"spacer\",\"data\":{\"col\":5}},{\"id\":\"a4lu0M6wkq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"All Tenant Users\",\"col\":3}},{\"id\":\"6rh7mOaIeV\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Tenancy Provisioning\",\"col\":3}},{\"id\":\"s13-BsLEj7\",\"type\":\"spacer\",\"data\":{\"col\":5}},{\"id\":\"8i1-T7-eY1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Failed Provisions\",\"col\":3}},{\"id\":\"tF7UUtA24Y\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Tenants\",\"col\":3}},{\"id\":\"XNN-DeWDf4\",\"type\":\"spacer\",\"data\":{\"col\":5}},{\"id\":\"0dVJaVsVhA\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Successful Provisions\",\"col\":3}},{\"id\":\"OCzv2LLgn6\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"Volxnyun0l\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Reports</span>\",\"col\":12}},{\"id\":\"HVV9A6RdZR\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"oPEq1FHcNI\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Successful Tenant Provisioning\",\"col\":12}},{\"id\":\"_p0NwtlR_L\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Tenants Sign Ups\",\"col\":12}}]",
+ "creation": "2026-11-20 16:39:04.315705",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "share-people",
+ "idx": 0,
+ "indicator_color": "",
+ "is_hidden": 0,
+ "label": "Tenants",
+ "links": [],
+ "modified": "2026-11-20 16:49:28.992246",
+ "modified_by": "Administrator",
+ "module": "Songa Multi Tenancy",
+ "name": "Tenants",
+ "number_cards": [
+  {
+   "label": "Active Tenants",
+   "number_card_name": "All Tenants (Active)"
+  },
+  {
+   "label": "Complete Provisions",
+   "number_card_name": "Tenant Provisioning (Completed)"
+  },
+  {
+   "label": "Failed Provisions",
+   "number_card_name": "Tenants Provisioning (Failed)"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ],
+ "sequence_id": 52.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "All Tenant Users",
+   "link_to": "Tenant User",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "label": "Tenants",
+   "link_to": "Tenant",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Red",
+   "doc_view": "List",
+   "label": "Failed Provisions",
+   "link_to": "Tenant Provisioning",
+   "stats_filter": "[[\"Tenant Provisioning\",\"status\",\"=\",\"Failed\",false]]",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "label": "Tenancy Provisioning",
+   "link_to": "Tenant Provisioning",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "label": "Successful Provisions",
+   "link_to": "Tenant Provisioning",
+   "stats_filter": "[[\"Tenant Provisioning\",\"status\",\"=\",\"Completed\",false]]",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "label": "Multi Tenancy Administrators",
+   "link_to": "Multi Tenancy Administrator",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "Tenants"
+}

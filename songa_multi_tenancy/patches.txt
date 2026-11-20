@@ -6,5 +6,4 @@
 # Patches added in this section will be executed after doctypes are migrated
 
 #Adopt existing structure
-songa_multi_tenancy.patches.v1.adoption.adopt_existing_companies
-songa_multi_tenancy.patches.v1.custom_fields.add_custom_fields
+
