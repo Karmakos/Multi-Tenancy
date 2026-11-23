@@ -28,7 +28,7 @@
   "label": "Tenants",
   "links": [],
   "modified": "2026-11-16 23:01:04.300044",
-  "module": null,
+  "module": "Songa Multi Tenancy",
   "name": "Tenants",
   "number_cards": [
    {
@@ -170,6 +170,7 @@
     "url": null
    }
   ],
-  "title": "Tenants"
+  "title": "Tenants",
+  "type": "Workspace"
  }
 ]
