@@ -114,7 +114,7 @@
     "parenttype": "Workspace",
     "report_ref_doctype": null,
     "restrict_to_domain": null,
-    "stats_filter": "[[\"Tenant Provisioning\",\"status\",\"=\",\"Failed\",false]]",
+    "stats_filter": "[[\"Tenant Provisioning\",\"status\",\"=\",\"Failed\"]]",
     "type": "DocType",
     "url": null
    },
@@ -148,7 +148,7 @@
     "parenttype": "Workspace",
     "report_ref_doctype": null,
     "restrict_to_domain": null,
-    "stats_filter": "[[\"Tenant Provisioning\",\"status\",\"=\",\"Completed\",false]]",
+    "stats_filter": "[[\"Tenant Provisioning\",\"status\",\"=\",\"Completed\"]]",
     "type": "DocType",
     "url": null
    },
