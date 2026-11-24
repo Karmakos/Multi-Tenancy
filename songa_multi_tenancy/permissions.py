@@ -155,7 +155,7 @@ def tenant_has_permission(doc, user=None, permission_type=None):
     user = user or frappe.session.user
 
     if is_platform_admin(user):
-        return None
+        return True
 
     tenant = get_user_tenant(user)
 
@@ -165,7 +165,7 @@ def tenant_has_permission(doc, user=None, permission_type=None):
     if doc.get("tenant") != tenant:
         return False
 
-    return None
+    return True
 
 
 # Doc level permission check for User doctype
