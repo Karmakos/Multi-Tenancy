@@ -5,6 +5,7 @@ import frappe
 from frappe import _
 from frappe.utils import now_datetime
 from songa_multi_tenancy.patches.v1.adoption.adopt_existing_companies import create_company_administrator_role_profile
+from songa_multi_tenancy.permissions import _user_company
 
 ROLE_PROFILE = "Company Administrator"
 
@@ -312,28 +313,38 @@ def create_administrator(
     phone,
     full_name,
 ):
-    """Create the tenant's initial administrator User."""
-
-    if frappe.db.exists("User", email):
-        frappe.throw(
-            _("Administrator email {0} is already registered.").format(email)
-        )
+    """Create the tenant's administrator User, adopting an existing
+    unassigned one when the email is already registered."""
 
     names = full_name.split(maxsplit=1)
 
     # Store digits only; User.phone is a plain Data field.
     phone = "".join(char for char in str(phone or "") if char.isdigit())
 
-    user = frappe.new_doc("User")
-    user.email = email
+    if frappe.db.exists("User", email):
+        # Adopt the existing user only when they are not already tied
+        # to a Company; an assigned user belongs to another tenant.
+        if _user_company(email):
+            frappe.throw(
+                _("Administrator email {0} is already registered.").format(email)
+            )
+
+        user = frappe.get_doc("User", email)
+    else:
+        user = frappe.new_doc("User")
+        user.email = email
+        user.user_type = "System User"
+        user.send_welcome_email = 0
+
     user.first_name = names[0]
     user.last_name = names[1] if len(names) > 1 else ""
     user.phone = phone
     user.enabled = 1
-    user.user_type = "System User"
-    user.send_welcome_email = 0
 
-    user.insert(ignore_permissions=True, ignore_mandatory=True)
+    if user.is_new():
+        user.insert(ignore_permissions=True, ignore_mandatory=True)
+    else:
+        user.save(ignore_permissions=True)
 
     provision.administrator = user.name
     provision.save(ignore_permissions=True)

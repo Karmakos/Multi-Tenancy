@@ -5,6 +5,7 @@ from frappe.utils import now_datetime
 
 from songa_multi_tenancy.api.v1.provisioning import PROVISIONING_STEPS
 from songa_multi_tenancy.api.v1.utils import reset_administrator_password
+from songa_multi_tenancy.permissions import _user_company
 
 MAX_RETRIES = 3
 
@@ -190,7 +191,7 @@ def register_tenant():
                 _("This Songa Tenant ID is already registered.")
             )
 
-        if frappe.db.exists("User", email):
+        if frappe.db.exists("User", email) and _user_company(email):
             frappe.throw(
                 _("The administrator email is already registered.")
             )
