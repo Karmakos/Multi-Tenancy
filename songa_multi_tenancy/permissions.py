@@ -109,6 +109,10 @@ department_query = _make_query("tabDepartment")
 designation_query = _make_query("tabDesignation")
 branch_query = _make_query("tabBranch")
 letter_head_query = _make_query("tabLetter Head")
+driver_query = _make_query("tabDriver")
+songa_webhook_log_query = _make_query("tabSonga Webhook Log")
+mpesa_express_request_query = _make_query("tabMpesa Express Request")
+lead_query = _make_query("tabLead")
 
 
 def user_query(user):
@@ -218,6 +222,10 @@ SCOPED_DOCTYPES = [
     "Designation",
     "Branch",
     "Letter Head",
+    "Driver",
+    "Songa Webhook Log",
+    "Mpesa Express Request",
+    "Lead",
 ]
 
 

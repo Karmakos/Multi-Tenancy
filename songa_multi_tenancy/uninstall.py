@@ -19,6 +19,10 @@ SCOPED_DOCTYPES = [
     "Designation",
     "Branch",
     "Letter Head",
+    "Driver",
+    "Songa Webhook Log",
+    "Mpesa Express Request",
+    "Lead",
 ]
 
 # fieldname -> expected Link target

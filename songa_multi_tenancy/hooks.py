@@ -159,6 +159,10 @@ permission_query_conditions = {
     "Designation": "songa_multi_tenancy.permissions.designation_query",
     "Branch": "songa_multi_tenancy.permissions.branch_query",
     "Letter Head": "songa_multi_tenancy.permissions.letter_head_query",
+    "Driver": "songa_multi_tenancy.permissions.driver_query",
+    "Songa Webhook Log": "songa_multi_tenancy.permissions.songa_webhook_log_query",
+    "Mpesa Express Request": "songa_multi_tenancy.permissions.mpesa_express_request_query",
+    "Lead": "songa_multi_tenancy.permissions.lead_query",
     "User": "songa_multi_tenancy.permissions.user_query",
 }
 
@@ -179,6 +183,10 @@ has_permission = {
     "Designation": "songa_multi_tenancy.permissions.tenant_has_permission",
     "Branch": "songa_multi_tenancy.permissions.tenant_has_permission",
     "Letter Head": "songa_multi_tenancy.permissions.tenant_has_permission",
+    "Driver": "songa_multi_tenancy.permissions.tenant_has_permission",
+    "Songa Webhook Log": "songa_multi_tenancy.permissions.tenant_has_permission",
+    "Mpesa Express Request": "songa_multi_tenancy.permissions.tenant_has_permission",
+    "Lead": "songa_multi_tenancy.permissions.tenant_has_permission",
     "User": "songa_multi_tenancy.permissions.user_has_permission",
 }
 
@@ -204,6 +212,10 @@ doc_events = {
     "Designation": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
     "Branch": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
     "Letter Head": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
+    "Driver": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
+    "Songa Webhook Log": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
+    "Mpesa Express Request": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
+    "Lead": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
 }
 
 # DocType Class
