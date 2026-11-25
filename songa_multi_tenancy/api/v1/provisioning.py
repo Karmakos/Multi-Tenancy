@@ -229,6 +229,10 @@ def run_step(provisioning_name, sequence, operation):
 def create_company(provision, company_name):
     """Create the ERPNext Company."""
 
+    frappe.log_error(
+        title="Provisioning",
+        message=f"Provision: {provision} | Company: {company_name}",
+    )    
     company = frappe.db.get_value(
         "Company",
         {"company_name": company_name},
@@ -327,7 +331,7 @@ def create_administrator(
     user.phone = phone
     user.enabled = 1
     user.user_type = "System User"
-    user.send_welcome_email = 0
+    user.send_welcome_email = 1
 
     user.insert(ignore_permissions=True, ignore_mandatory=True)
 

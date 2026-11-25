@@ -114,12 +114,18 @@ def register_tenant():
                 _("Missing required tenant registration fields.")
             )
 
-        existing_provision = frappe.db.get_value(
+        existing_provision = frappe.get_all(
             "Tenant Provisioning",
-            {"songa_tenant_id": songa_tenant_id},
-            ["name", "provisioning_id", "status"],
-            as_dict=True,
+            filters={},
+            or_filters=[
+                {"songa_tenant_id": songa_tenant_id},
+                {"company": company_name},
+            ],
+            fields=["name", "provisioning_id", "status"],
+            limit=1,
         )
+
+        existing_provision = existing_provision[0] if existing_provision else None
 
         if existing_provision:
             # A Failed request can be retried; anything else is a duplicate.
@@ -132,6 +138,14 @@ def register_tenant():
                 # Prefer the originally registered payload; fall back to
                 # the values supplied in this request.
                 original = provision.payload or {}
+
+                if isinstance(original, str):
+                    original = frappe.parse_json(original)
+
+                if not isinstance(original, dict):
+                    original = {}
+
+
                 original_admin = original.get("admin") or {}
 
                 return requeue_failed_provisioning(
@@ -164,6 +178,7 @@ def register_tenant():
             )
 
         provision = frappe.new_doc("Tenant Provisioning")
+        provision.company = None
         provision.songa_tenant_id = songa_tenant_id
         provision.provisioning_id = frappe.generate_hash(length=20)
         provision.tenant_category = tenant_category
