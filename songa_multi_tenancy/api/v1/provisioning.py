@@ -331,7 +331,7 @@ def create_administrator(
     user.phone = phone
     user.enabled = 1
     user.user_type = "System User"
-    user.send_welcome_email = 1
+    user.send_welcome_email = 0
 
     user.insert(ignore_permissions=True, ignore_mandatory=True)
 
