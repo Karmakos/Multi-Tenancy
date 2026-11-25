@@ -6,6 +6,8 @@ from frappe.utils import now_datetime
 from songa_multi_tenancy.api.v1.provisioning import PROVISIONING_STEPS
 from songa_multi_tenancy.api.v1.utils import reset_administrator_password
 
+MAX_RETRIES = 3
+
 
 def api_response(success, message, status_code, data=None):
     """Standard response envelope."""
@@ -44,6 +46,22 @@ def requeue_failed_provisioning(provision, company_name, email, phone, full_name
     provisioning resumes where it left off.
     """
 
+    retry_count = provision.retry_count or 0
+
+    if retry_count >= MAX_RETRIES:
+        return api_response(
+            False,
+            "Maximum provisioning retries exceeded.",
+            409,
+            {
+                "Songa_tenant_id": provision.songa_tenant_id,
+                "provisioning_id": provision.provisioning_id,
+                "status": provision.status,
+                "retry_count": retry_count,
+            },
+        )
+
+    provision.retry_count = retry_count + 1
     provision.status = "Queued"
     provision.started_on = now_datetime()
     provision.completed_on = None

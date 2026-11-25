@@ -99,6 +99,13 @@
    "tenant_id": "SYSTEM"
   },
   {
+   "default": "0",
+   "fieldname": "retry_count",
+   "fieldtype": "Int",
+   "label": "Retry Count",
+   "tenant_id": "SYSTEM"
+  },
+  {
    "columns": 5,
    "fieldname": "progress",
    "fieldtype": "Table",

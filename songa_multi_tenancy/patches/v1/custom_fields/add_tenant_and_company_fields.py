@@ -20,6 +20,11 @@ def add_tenant_and_company_fields():
         "Designation",
         "Branch",
         "Letter Head",
+        "Driver",
+        "Songa Webhook Log",
+        "Mpesa Express Request",
+        "Lead"
+
     ]
 
     custom_fields = {}
