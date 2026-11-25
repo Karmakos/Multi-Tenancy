@@ -1,112 +1,297 @@
 {
-  "info": {
-    "_postman_id": "b7c772ab-16a4-42d2-a260-5e52bbda4a2c",
-    "name": "Songa Multi Tenancy",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "27011734"
+ "info": {
+  "_postman_id": "b7c772ab-16a4-42d2-a260-5e52bbda4a2c",
+  "name": "Songa Multi Tenancy",
+  "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+  "_exporter_id": "27011734"
+ },
+ "item": [
+  {
+   "name": "Register Tenant",
+   "request": {
+    "auth": {
+     "type": "noauth"
+    },
+    "method": "POST",
+    "header": [
+     {
+      "key": "Authorization",
+      "value": "{{songa_access_token}}"
+     }
+    ],
+    "body": {
+     "mode": "raw",
+     "raw": "{\r\n  \"songa_tenant_id\": \"SONGA-TENANT-111\",\r\n  \"company\": \"Acmen Corp Kenya Plc\",\r\n  \"tenant_category\": \"Co-operative\",\r\n  \"admin\": {\r\n    \"email\": \"admin@acmecorltd.com\",\r\n    \"phone\": \"+2541234567870\",\r\n    \"full_name\": \"John Murigi\"\r\n  },\r\n    \"selected_songa_modules\": [\r\n    \"Trips\",\r\n    \"Sessions\",\r\n    \"Drivers\"\r\n  ]\r\n}",
+     "options": {
+      "raw": {
+       "language": "json"
+      }
+     }
+    },
+    "url": {
+     "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.api.register_tenant",
+     "host": [
+      "{{Website}}"
+     ],
+     "path": [
+      "api",
+      "method",
+      "songa_multi_tenancy.api.v1.api.register_tenant"
+     ]
+    }
+   },
+   "response": []
   },
-  "item": [
-    {
-      "name": "Register Tenant",
-      "request": {
-        "auth": {
-          "type": "noauth"
-        },
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "{{songa_access_token}}"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"songa_tenant_id\": \"SONGA-TENANT-111\",\r\n  \"company\": \"Acmen Corp Kenya Plc\",\r\n  \"tenant_category\": \"Co-operative\",\r\n  \"admin\": {\r\n    \"email\": \"admin@acmecorltd.com\",\r\n    \"phone\": \"+2541234567870\",\r\n    \"full_name\": \"John Murigi\"\r\n  },\r\n    \"selected_songa_modules\": [\r\n    \"Trips\",\r\n    \"Sessions\",\r\n    \"Drivers\"\r\n  ]\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.api.register_tenant",
-          "host": [
-            "{{Website}}"
-          ],
-          "path": [
-            "api",
-            "method",
-            "songa_multi_tenancy.api.v1.api.register_tenant"
-          ]
-        }
+  {
+   "name": "Check Tenant Status",
+   "request": {
+    "auth": {
+     "type": "noauth"
+    },
+    "method": "GET",
+    "header": [
+     {
+      "key": "Authorization",
+      "value": "{{songa_access_token}}"
+     }
+    ],
+    "body": {
+     "mode": "raw",
+     "raw": "{\r\n  \"songa_tenant_id\": \"SONGA-TENANT-111\",\r\n  \"provisioning_id\": \"4b0028ba8c7becdeab40\"\r\n}",
+     "options": {
+      "raw": {
+       "language": "json"
+      }
+     }
+    },
+    "url": {
+     "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.api.get_tenant_provisioning_status",
+     "host": [
+      "{{Website}}"
+     ],
+     "path": [
+      "api",
+      "method",
+      "songa_multi_tenancy.api.v1.api.get_tenant_provisioning_status"
+     ],
+     "query": [
+      {
+       "key": "Songa_tenant_id",
+       "value": "SONGA-TENANT-01",
+       "disabled": true
       },
-      "response": []
-    },
-    {
-      "name": "Check Tenant Status",
-      "request": {
-        "auth": {
-          "type": "noauth"
-        },
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "{{songa_access_token}}"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"songa_tenant_id\": \"SONGA-TENANT-111\",\r\n  \"provisioning_id\": \"4b0028ba8c7becdeab40\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.api.get_tenant_provisioning_status",
-          "host": [
-            "{{Website}}"
-          ],
-          "path": [
-            "api",
-            "method",
-            "songa_multi_tenancy.api.v1.api.get_tenant_provisioning_status"
-          ],
-          "query": [
-            {
-              "key": "Songa_tenant_id",
-              "value": "SONGA-TENANT-01",
-              "disabled": true
-            },
-            {
-              "key": "provisioning_id",
-              "value": "fd4c520eba1e1ed288e8",
-              "disabled": true
-            }
-          ]
-        }
-      },
-      "response": []
+      {
+       "key": "provisioning_id",
+       "value": "fd4c520eba1e1ed288e8",
+       "disabled": true
+      }
+     ]
     }
-  ],
-  "variable": [
-    {
-      "key": "songa_access_token",
-      "value": ""
+   },
+   "response": []
+  },
+  {
+   "name": "Suspend Tenant",
+   "request": {
+    "auth": {
+     "type": "noauth"
     },
-    {
-      "key": "Website",
-      "value": ""
+    "method": "POST",
+    "header": [
+     {
+      "key": "Authorization",
+      "value": "{{songa_access_token}}"
+     }
+    ],
+    "body": {
+     "mode": "raw",
+     "raw": "{\r\n  \"tenant\": \"gb831fs0kf\"\r\n}",
+     "options": {
+      "raw": {
+       "language": "json"
+      }
+     }
     },
-    {
-      "key": "local_website",
-      "value": ""
-    },
-    {
-      "key": "local_songa_access_token",
-      "value": ""
+    "description": "Suspend a tenant: disables memberships and member logins.",
+    "url": {
+     "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.tenants.suspend_tenant",
+     "host": [
+      "{{Website}}"
+     ],
+     "path": [
+      "api",
+      "method",
+      "songa_multi_tenancy.api.v1.tenants.suspend_tenant"
+     ]
     }
-  ]
+   },
+   "response": []
+  },
+  {
+   "name": "Pause Tenant",
+   "request": {
+    "auth": {
+     "type": "noauth"
+    },
+    "method": "POST",
+    "header": [
+     {
+      "key": "Authorization",
+      "value": "{{songa_access_token}}"
+     }
+    ],
+    "body": {
+     "mode": "raw",
+     "raw": "{\r\n  \"tenant\": \"gb831fs0kf\"\r\n}",
+     "options": {
+      "raw": {
+       "language": "json"
+      }
+     }
+    },
+    "description": "Pause a tenant: disables memberships and member logins.",
+    "url": {
+     "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.tenants.pause_tenant",
+     "host": [
+      "{{Website}}"
+     ],
+     "path": [
+      "api",
+      "method",
+      "songa_multi_tenancy.api.v1.tenants.pause_tenant"
+     ]
+    }
+   },
+   "response": []
+  },
+  {
+   "name": "Activate Tenant",
+   "request": {
+    "auth": {
+     "type": "noauth"
+    },
+    "method": "POST",
+    "header": [
+     {
+      "key": "Authorization",
+      "value": "{{songa_access_token}}"
+     }
+    ],
+    "body": {
+     "mode": "raw",
+     "raw": "{\r\n  \"tenant\": \"gb831fs0kf\"\r\n}",
+     "options": {
+      "raw": {
+       "language": "json"
+      }
+     }
+    },
+    "description": "Reactivate a tenant: restores memberships and re-enables member logins.",
+    "url": {
+     "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.tenants.activate_tenant",
+     "host": [
+      "{{Website}}"
+     ],
+     "path": [
+      "api",
+      "method",
+      "songa_multi_tenancy.api.v1.tenants.activate_tenant"
+     ]
+    }
+   },
+   "response": []
+  },
+  {
+   "name": "Archive Tenant",
+   "request": {
+    "auth": {
+     "type": "noauth"
+    },
+    "method": "POST",
+    "header": [
+     {
+      "key": "Authorization",
+      "value": "{{songa_access_token}}"
+     }
+    ],
+    "body": {
+     "mode": "raw",
+     "raw": "{\r\n  \"tenant\": \"gb831fs0kf\"\r\n}",
+     "options": {
+      "raw": {
+       "language": "json"
+      }
+     }
+    },
+    "description": "Archive a tenant: disables memberships and member logins. Data preserved.",
+    "url": {
+     "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.tenants.archive_tenant",
+     "host": [
+      "{{Website}}"
+     ],
+     "path": [
+      "api",
+      "method",
+      "songa_multi_tenancy.api.v1.tenants.archive_tenant"
+     ]
+    }
+   },
+   "response": []
+  },
+  {
+   "name": "Delete Tenant",
+   "request": {
+    "auth": {
+     "type": "noauth"
+    },
+    "method": "POST",
+    "header": [
+     {
+      "key": "Authorization",
+      "value": "{{songa_access_token}}"
+     }
+    ],
+    "body": {
+     "mode": "raw",
+     "raw": "{\r\n  \"tenant\": \"gb831fs0kf\"\r\n}",
+     "options": {
+      "raw": {
+       "language": "json"
+      }
+     }
+    },
+    "description": "Soft-delete a tenant: status becomes Deleted, member users disabled. Data preserved.",
+    "url": {
+     "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.tenants.delete_tenant",
+     "host": [
+      "{{Website}}"
+     ],
+     "path": [
+      "api",
+      "method",
+      "songa_multi_tenancy.api.v1.tenants.delete_tenant"
+     ]
+    }
+   },
+   "response": []
+  }
+ ],
+ "variable": [
+  {
+   "key": "songa_access_token",
+   "value": ""
+  },
+  {
+   "key": "Website",
+   "value": ""
+  },
+  {
+   "key": "local_website",
+   "value": ""
+  },
+  {
+   "key": "local_songa_access_token",
+   "value": ""
+  }
+ ]
 }

@@ -456,7 +456,7 @@
    "non_negative": 0,
    "oldfieldname": null,
    "oldfieldtype": null,
-   "options": "Pending\nActive\nSuspended\nArchived",
+   "options": "Pending\nActive\nSuspended\nPaused\nArchived\nDeleted",
    "parent": "Tenant",
    "parentfield": "fields",
    "parenttype": "DocType",

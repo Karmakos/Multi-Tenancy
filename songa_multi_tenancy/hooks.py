@@ -163,6 +163,11 @@ permission_query_conditions = {
     "Songa Webhook Log": "songa_multi_tenancy.permissions.songa_webhook_log_query",
     "Mpesa Express Request": "songa_multi_tenancy.permissions.mpesa_express_request_query",
     "Lead": "songa_multi_tenancy.permissions.lead_query",
+    "Driver Commission Ledger": "songa_multi_tenancy.permissions.driver_commission_ledger_query",
+    "Asset Type": "songa_multi_tenancy.permissions.asset_type_query",
+    "Rental Days": "songa_multi_tenancy.permissions.rental_days_query",
+    "Severity Type": "songa_multi_tenancy.permissions.severity_type_query",
+    "Energy KWh": "songa_multi_tenancy.permissions.energy_kwh_query",
     "User": "songa_multi_tenancy.permissions.user_query",
 }
 
@@ -187,6 +192,11 @@ has_permission = {
     "Songa Webhook Log": "songa_multi_tenancy.permissions.tenant_has_permission",
     "Mpesa Express Request": "songa_multi_tenancy.permissions.tenant_has_permission",
     "Lead": "songa_multi_tenancy.permissions.tenant_has_permission",
+    "Driver Commission Ledger": "songa_multi_tenancy.permissions.tenant_has_permission",
+    "Asset Type": "songa_multi_tenancy.permissions.tenant_has_permission",
+    "Rental Days": "songa_multi_tenancy.permissions.tenant_has_permission",
+    "Severity Type": "songa_multi_tenancy.permissions.tenant_has_permission",
+    "Energy KWh": "songa_multi_tenancy.permissions.tenant_has_permission",
     "User": "songa_multi_tenancy.permissions.user_has_permission",
 }
 
@@ -216,6 +226,11 @@ doc_events = {
     "Songa Webhook Log": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
     "Mpesa Express Request": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
     "Lead": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
+    "Driver Commission Ledger": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
+    "Asset Type": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
+    "Rental Days": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
+    "Severity Type": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
+    "Energy KWh": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
 }
 
 # DocType Class
@@ -369,6 +384,12 @@ fixtures = [
         "dt": "Workspace", 
         "filters": [
             ["name", "=", "Tenants"]
+        ]
+    },
+	{
+        "dt": "Client Script",
+        "filters": [
+            ["name", "=", "Tenant Lifecycle Actions"]
         ]
     }
 ]

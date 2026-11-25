@@ -1,31 +1,14 @@
 import frappe
 from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 
-def add_tenant_and_company_fields():
-    # List of shared/master DocTypes you want to scope by tenant and company
-    tenant_scoped_doctypes = [
-        "Item",
-        "Item Group",
-        "Brand",
-        "Customer",
-        "Customer Group",
-        "Supplier",
-        "Supplier Group",
-        "Territory",
-        "Price List",
-        "Item Price",
-        "Pricing Rule",
-        "Holiday List",
-        "Department",
-        "Designation",
-        "Branch",
-        "Letter Head",
-        "Driver",
-        "Songa Webhook Log",
-        "Mpesa Express Request",
-        "Lead"
+from songa_multi_tenancy.patches.v1.custom_fields.scoped_doctypes import (
+    get_tenant_scoped_doctypes,
+)
 
-    ]
+
+def add_tenant_and_company_fields():
+    # Shared/master DocTypes plus every DocType under SCOPED_MODULES
+    tenant_scoped_doctypes = get_tenant_scoped_doctypes()
 
     custom_fields = {}
 

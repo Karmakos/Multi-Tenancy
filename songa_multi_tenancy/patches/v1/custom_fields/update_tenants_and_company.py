@@ -1,5 +1,9 @@
 import frappe
 
+from songa_multi_tenancy.patches.v1.custom_fields.scoped_doctypes import (
+    get_tenant_scoped_doctypes,
+)
+
 
 SYSTEM_TENANT_TYPE = "System"
 
@@ -14,28 +18,7 @@ def update_tenant_and_company_fields():
     - Preserves records already assigned to another tenant.
     """
 
-    tenant_scoped_doctypes = [
-        "Item",
-        "Item Group",
-        "Brand",
-        "Customer",
-        "Customer Group",
-        "Supplier",
-        "Supplier Group",
-        "Territory",
-        "Price List",
-        "Item Price",
-        "Pricing Rule",
-        "Holiday List",
-        "Department",
-        "Designation",
-        "Branch",
-        "Letter Head",
-        "Driver",
-        "Songa Webhook Log",
-        "Mpesa Express Request",
-        "Lead",
-    ]
+    tenant_scoped_doctypes = get_tenant_scoped_doctypes()
 
     # Get all tenants and identify SYSTEM
 

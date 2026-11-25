@@ -23,6 +23,11 @@ SCOPED_DOCTYPES = [
     "Songa Webhook Log",
     "Mpesa Express Request",
     "Lead",
+    "Driver Commission Ledger",
+    "Asset Type",
+    "Rental Days",
+    "Severity Type",
+    "Energy KWh",
 ]
 
 # fieldname -> expected Link target

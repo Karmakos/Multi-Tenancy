@@ -7,11 +7,26 @@ PLATFORM_ADMIN_DOCTYPE = "Multi Tenancy Administrator"
 def get_user_tenant(user=None):
     user = user or frappe.session.user
 
-    return frappe.db.get_value(
+    tenant = frappe.db.get_value(
         "Tenant User",
         {"user": user, "status": "Active"},
         "tenant",
     )
+
+    if not tenant:
+        return None
+
+    # Suspended/Paused/Archived/Deleted tenants grant no access even
+    # if a Tenant User row was left Active.
+    if frappe.db.get_value("Tenant", tenant, "status") in (
+        "Suspended",
+        "Paused",
+        "Archived",
+        "Deleted",
+    ):
+        return None
+
+    return tenant
 
 
 def is_platform_admin(user=None):
@@ -113,6 +128,11 @@ driver_query = _make_query("tabDriver")
 songa_webhook_log_query = _make_query("tabSonga Webhook Log")
 mpesa_express_request_query = _make_query("tabMpesa Express Request")
 lead_query = _make_query("tabLead")
+driver_commission_ledger_query = _make_query("tabDriver Commission Ledger")
+asset_type_query = _make_query("tabAsset Type")
+rental_days_query = _make_query("tabRental Days")
+severity_type_query = _make_query("tabSeverity Type")
+energy_kwh_query = _make_query("tabEnergy KWh")
 
 
 def user_query(user):
@@ -226,6 +246,11 @@ SCOPED_DOCTYPES = [
     "Songa Webhook Log",
     "Mpesa Express Request",
     "Lead",
+    "Driver Commission Ledger",
+    "Asset Type",
+    "Rental Days",
+    "Severity Type",
+    "Energy KWh",
 ]
 
 
