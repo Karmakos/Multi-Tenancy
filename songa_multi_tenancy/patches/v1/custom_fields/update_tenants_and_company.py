@@ -88,19 +88,32 @@ def update_tenant_and_company_fields():
 
         table = f"`tab{doctype}`"
 
-        # Assign unowned records to SYSTEM. Only the tenant is set
-        # here; an existing company value is preserved and empty
-        # company values are filled by the update below.
-        frappe.db.sql(
-            f"""
-            UPDATE {table}
-            SET tenant = %s
-            WHERE
-                tenant IS NULL
-                OR tenant = ''
-            """,
-            (tenant_name,),
-        )
+        # Assign unowned records to SYSTEM.
+        # Both fields are assigned together where available.
+        if has_company:
+            frappe.db.sql(
+                f"""
+                UPDATE {table}
+                SET
+                    tenant = %s,
+                    company = %s
+                WHERE
+                    tenant IS NULL
+                    OR tenant = ''
+                """,
+                (tenant_name, company_name),
+            )
+        else:
+            frappe.db.sql(
+                f"""
+                UPDATE {table}
+                SET tenant = %s
+                WHERE
+                    tenant IS NULL
+                    OR tenant = ''
+                """,
+                (tenant_name,),
+            )
 
         # Fill missing company only on records already belonging
         # to SYSTEM. Never overwrite another tenant's company.
@@ -131,7 +144,5 @@ def update_tenant_and_company_fields():
     frappe.logger("songa_multi_tenancy").info(
         "SYSTEM tenant resource adoption completed."
     )
-
-    frappe.db.commit()
 
     return results

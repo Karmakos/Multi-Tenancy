@@ -1,8 +1,5 @@
 import frappe
 
-LOGGER = frappe.logger("songa_multi_tenancy")
-
-
 def get_existing_companies():
     """Return all Companies ordered oldest first."""
 

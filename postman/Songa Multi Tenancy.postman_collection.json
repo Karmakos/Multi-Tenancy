@@ -21,7 +21,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n  \"songa_tenant_id\": \"SONGA-TENANT-111\",\r\n  \"company\": \"Acmen Corp Kenya Plc\",\r\n  \"tenant_category\": \"Co-operative\",\r\n  \"admin\": {\r\n    \"email\": \"admin@acmecorltd.com\",\r\n    \"phone\": \"+2541234567870\",\r\n    \"full_name\": \"John Murigi\"\r\n  },\r\n    \"selected_songa_modules\": [\r\n    \"Trips\",\r\n    \"Sessions\",\r\n    \"Drivers\"\r\n  ]\r\n}",
+          "raw": "{\r\n  \"Songa_tenant_id\": \"SONGA-TENANT-02\",\r\n  \"company\": \"Acme Corp Kenya Plc\",\r\n  \"tenant_category\": \"Co-operative\",\r\n  \"admin\": {\r\n    \"email\": \"admin@acmecorpplc.com\",\r\n    \"phone\": \"+2541234567890\",\r\n    \"full_name\": \"John Mwangi\"\r\n  }\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -32,6 +32,42 @@
           "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.api.register_tenant",
           "host": [
             "{{Website}}"
+          ],
+          "path": [
+            "api",
+            "method",
+            "songa_multi_tenancy.api.v1.api.register_tenant"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register Tenant Copy",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{local_songa_access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"Songa_tenant_id\": \"SONGA-TENANT-0927\",\r\n  \"company\": \"Acme Corp Kinya Pilic\",\r\n  \"tenant_category\": \"Co-operative\",\r\n  \"admin\": {\r\n    \"email\": \"admin@acmecoreppilc.com\",\r\n    \"phone\": \"+2541234567890\",\r\n    \"full_name\": \"John Mwangi\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{local_website}}/api/method/songa_multi_tenancy.api.v1.api.register_tenant",
+          "host": [
+            "{{local_website}}"
           ],
           "path": [
             "api",
@@ -57,7 +93,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n  \"songa_tenant_id\": \"SONGA-TENANT-111\",\r\n  \"provisioning_id\": \"4b0028ba8c7becdeab40\"\r\n}",
+          "raw": "{\r\n  \"Songa_tenant_id\": \"SONGA-TENANT-01\",\r\n  \"provisioning_id\": \"fd4c520eba1e1ed288e8\"\r\n}",
           "options": {
             "raw": {
               "language": "json"

@@ -89,7 +89,7 @@ app_license = "mit"
 # ------------
 
 # before_uninstall = "songa_multi_tenancy.uninstall.before_uninstall"
-after_uninstall = "songa_multi_tenancy.uninstall.after_uninstall"
+# after_uninstall = "songa_multi_tenancy.uninstall.after_uninstall"
 
 # Integration Setup
 # ------------------
@@ -145,19 +145,10 @@ permission_query_conditions = {
     "Item": "songa_multi_tenancy.permissions.item_query",
     "Item Group": "songa_multi_tenancy.permissions.item_group_query",
     "Customer": "songa_multi_tenancy.permissions.customer_query",
-    "Customer Group": "songa_multi_tenancy.permissions.customer_group_query",
     "Supplier": "songa_multi_tenancy.permissions.supplier_query",
-    "Supplier Group": "songa_multi_tenancy.permissions.supplier_group_query",
-    "Territory": "songa_multi_tenancy.permissions.territory_query",
     "Brand": "songa_multi_tenancy.permissions.brand_query",
     "Price List": "songa_multi_tenancy.permissions.price_list_query",
     "Item Price": "songa_multi_tenancy.permissions.item_price_query",
-    "Pricing Rule": "songa_multi_tenancy.permissions.pricing_rule_query",
-    "Holiday List": "songa_multi_tenancy.permissions.holiday_list_query",
-    "Department": "songa_multi_tenancy.permissions.department_query",
-    "Designation": "songa_multi_tenancy.permissions.designation_query",
-    "Branch": "songa_multi_tenancy.permissions.branch_query",
-    "Letter Head": "songa_multi_tenancy.permissions.letter_head_query",
     "User": "songa_multi_tenancy.permissions.user_query",
 }
 
@@ -165,44 +156,11 @@ has_permission = {
     "Item": "songa_multi_tenancy.permissions.tenant_has_permission",
     "Item Group": "songa_multi_tenancy.permissions.tenant_has_permission",
     "Customer": "songa_multi_tenancy.permissions.tenant_has_permission",
-    "Customer Group": "songa_multi_tenancy.permissions.tenant_has_permission",
     "Supplier": "songa_multi_tenancy.permissions.tenant_has_permission",
-    "Supplier Group": "songa_multi_tenancy.permissions.tenant_has_permission",
-    "Territory": "songa_multi_tenancy.permissions.tenant_has_permission",
     "Brand": "songa_multi_tenancy.permissions.tenant_has_permission",
     "Price List": "songa_multi_tenancy.permissions.tenant_has_permission",
     "Item Price": "songa_multi_tenancy.permissions.tenant_has_permission",
-    "Pricing Rule": "songa_multi_tenancy.permissions.tenant_has_permission",
-    "Holiday List": "songa_multi_tenancy.permissions.tenant_has_permission",
-    "Department": "songa_multi_tenancy.permissions.tenant_has_permission",
-    "Designation": "songa_multi_tenancy.permissions.tenant_has_permission",
-    "Branch": "songa_multi_tenancy.permissions.tenant_has_permission",
-    "Letter Head": "songa_multi_tenancy.permissions.tenant_has_permission",
     "User": "songa_multi_tenancy.permissions.user_has_permission",
-}
-
-# Automatically assign tenant/company context to scoped records and
-# keep Tenant User registrations in sync.
-doc_events = {
-    "User": {
-        "on_update": "songa_multi_tenancy.permissions.sync_tenant_user",
-    },
-    "Item": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
-    "Item Group": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
-    "Brand": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
-    "Customer": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
-    "Customer Group": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
-    "Supplier": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
-    "Supplier Group": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
-    "Territory": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
-    "Price List": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
-    "Item Price": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
-    "Pricing Rule": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
-    "Holiday List": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
-    "Department": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
-    "Designation": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
-    "Branch": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
-    "Letter Head": {"validate": "songa_multi_tenancy.permissions.assign_tenant_context"},
 }
 
 # DocType Class
@@ -364,28 +322,28 @@ fixtures = [
             ["module", "=", "Songa Multi Tenancy"]
         ]
     },
-    {
-        "dt": "Custom Field",
-        "filters": [
-            ["dt", "=", "Contact"]
-        ],
-    },
-    {
-        "dt": "Number Card",
-        "filters": [
-            ["document_type", "in", ["Tenant Provisioning", "Tenant"]]
-        ]
-    },
-    {
-        "dt": "Dashboard Chart",
-        "filters": [
-            ["document_type", "in", ["Tenant Provisioning", "Tenant"]]
-        ]
-    },
 	{
         "dt": "Workspace", 
         "filters": [
             ["name", "=", "Tenants"]
         ]
+    },
+	{
+        "dt": "Dashboard Chart", 
+        "filters": [
+            ["module", "=", "Songa Multi Tenancy"]
+        ]
+    },
+	{
+        "dt": "Number Card", 
+        "filters": [
+            ["module", "=", "Songa Multi Tenancy"]
+        ]
+    },
+    {
+        "dt": "Custom Field",
+        "filters": [
+            ["dt", "=", "Contact"]
+        ],
     }
 ]

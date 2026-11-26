@@ -41,7 +41,7 @@ SYSTEM_WIDE_ROLES = {
 # Exclude Guest. Administrator is intentionally included if it exists.
 EXCLUDED_USERS = {"Guest"}
 
-LOGGER = frappe.logger("songa_multi_tenancy")
+LOGGER = frappe.logger("saas_platform")
 
 
 # ---------------------------------------------------------------------------
@@ -616,19 +616,11 @@ def register_platform_administrator(
         installation_user,
     )
 
-    # administrator_level links to Role Profile; only set a valid target.
-    level = frappe.db.get_value(
-        "User",
-        {"name": user},
-        "role_profile_name",
-    ) or COMPANY_ADMINISTRATOR_PROFILE
-
-    if frappe.db.exists("Role Profile", level):
-        set_first_available_field(
-            doc,
-            ["administrator_level", "level"],
-            level,
-        )
+    set_first_available_field(
+        doc,
+        ["administrator_level", "level"],
+        SYSTEM_MANAGER_ROLE,
+    )
 
     set_first_available_field(
         doc,
@@ -724,6 +716,9 @@ def verify_adoption(tenants):
             )
 
         seen_companies.add(company)
+
+        if tenant.tenant_id == SYSTEM_TENANT_ID and tenant.company != company:
+            frappe.throw("SYSTEM Tenant Company mismatch.")
 
     LOGGER.info(
         "Adoption verification successful for %s Tenants.",
