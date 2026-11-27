@@ -256,17 +256,25 @@ SCOPED_DOCTYPES = [
 
 def assign_tenant_context(doc, method=None):
     """
-    Default the tenant (and company) on newly saved scoped records
-    from the session user's Tenant User registration.
+    Tag tenant (and company) on newly saved scoped records.
+
+    Resolution order:
+    1. The session user's Tenant User registration.
+    2. The record's company field -> matching Tenant.company
+       (covers platform admins and users without a membership).
     """
 
     if not doc.meta.has_field("tenant") or doc.get("tenant"):
         return
 
-    if is_platform_admin():
-        return
-
     tenant = get_user_tenant()
+
+    if not tenant and doc.meta.has_field("company") and doc.get("company"):
+        tenant = frappe.db.get_value(
+            "Tenant",
+            {"company": doc.company, "status": "Active"},
+            "name",
+        )
 
     if not tenant:
         return

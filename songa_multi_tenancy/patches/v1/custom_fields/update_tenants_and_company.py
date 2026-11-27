@@ -75,9 +75,10 @@ def update_tenant_and_company_fields():
 
         table = f"`tab{doctype}`"
 
-        # Assign unowned records to SYSTEM. Only the tenant is set
-        # here; an existing company value is preserved and empty
-        # company values are filled by the update below.
+        # Assign unowned or orphaned records to SYSTEM. A tenant value
+        # pointing at a non-existent Tenant is treated as unowned.
+        # Only the tenant is set here; an existing company value is
+        # preserved and empty company values are filled below.
         frappe.db.sql(
             f"""
             UPDATE {table}
@@ -85,6 +86,7 @@ def update_tenant_and_company_fields():
             WHERE
                 tenant IS NULL
                 OR tenant = ''
+                OR tenant NOT IN (SELECT name FROM `tabTenant`)
             """,
             (tenant_name,),
         )
