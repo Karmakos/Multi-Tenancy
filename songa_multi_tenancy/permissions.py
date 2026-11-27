@@ -186,7 +186,14 @@ def tenant_has_permission(doc, user=None, permission_type=None):
     if not tenant:
         return False
 
-    if doc.get("tenant") != tenant:
+    doc_tenant = doc.get("tenant")
+
+    # New records have no tenant yet — assign_tenant_context tags
+    # them during validate, after this permission check runs.
+    if not doc_tenant and doc.is_new():
+        return None
+
+    if doc_tenant != tenant:
         return False
 
     return None

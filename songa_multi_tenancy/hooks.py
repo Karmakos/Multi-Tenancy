@@ -389,7 +389,12 @@ fixtures = [
 	{
         "dt": "Client Script",
         "filters": [
-            ["name", "=", "Tenant Lifecycle Actions"]
+            ["name", "in", [
+                "Tenant Lifecycle Actions",
+                "Supplier Group Tenant Parents",
+                "Item Group Tenant Parents",
+                "Customer Group Tenant Parents",
+            ]]
         ]
     }
 ]

@@ -1,7 +1,14 @@
 import frappe
 from frappe import _
 
-from songa_multi_tenancy.permissions import is_platform_admin
+from songa_multi_tenancy.permissions import get_user_tenant, is_platform_admin
+
+
+@frappe.whitelist()
+def current_tenant():
+    """Return the session user's active tenant docname (or None)."""
+
+    return get_user_tenant() or ""
 
 
 def _require_platform_admin():

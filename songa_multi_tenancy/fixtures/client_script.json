@@ -6,5 +6,29 @@
   "view": "Form",
   "enabled": 1,
   "script": "frappe.ui.form.on('Tenant', {\n    refresh(frm) {\n        const call = (method) => {\n            return frappe.call({\n                method: 'songa_multi_tenancy.api.v1.tenants.' + method,\n                args: { tenant: frm.doc.name },\n            }).then(() => frm.reload_doc());\n        };\n\n        const confirm_call = (label, method) => {\n            frappe.confirm(label, () => call(method));\n        };\n\n        if (frm.doc.status === 'Active') {\n            frm.add_custom_button(__('Suspend'), () => {\n                confirm_call(\n                    __('Suspend this tenant? Its users will lose access until reactivated.'),\n                    'suspend_tenant'\n                );\n            }, __('Actions'));\n\n            frm.add_custom_button(__('Pause'), () => {\n                confirm_call(\n                    __('Pause this tenant? Its users will lose access until reactivated.'),\n                    'pause_tenant'\n                );\n            }, __('Actions'));\n        }\n\n        if (['Suspended', 'Paused', 'Pending', 'Archived', 'Deleted'].includes(frm.doc.status)) {\n            frm.add_custom_button(__('Activate'), () => {\n                call('activate_tenant');\n            }, __('Actions'));\n        }\n\n        if (!['Archived', 'Deleted'].includes(frm.doc.status)) {\n            frm.add_custom_button(__('Archive'), () => {\n                confirm_call(\n                    __('Archive this tenant? Its users will lose access.'),\n                    'archive_tenant'\n                );\n            }, __('Actions'));\n        }\n\n        if (frm.doc.status !== 'Deleted') {\n            frm.add_custom_button(__('Delete Tenant'), () => {\n                frappe.confirm(\n                    __('Mark this tenant as deleted? Its users will be disabled and unable to log in. Data is preserved.'),\n                    () => call('delete_tenant')\n                );\n            }, __('Actions'));\n        }\n    }\n});"
+ },
+ {
+  "doctype": "Client Script",
+  "name": "Supplier Group Tenant Parents",
+  "dt": "Supplier Group",
+  "view": "Form",
+  "enabled": 1,
+  "script": "frappe.ui.form.on('Supplier Group', {\n    refresh(frm) {\n        frappe.call({\n            method: 'songa_multi_tenancy.api.v1.tenants.current_tenant',\n        }).then((r) => {\n            const tenant = r.message;\n\n            // Platform admins and tenant-less users see all parents.\n            if (!tenant) {\n                return;\n            }\n\n            // frappe.get_list already applies permission_query_conditions,\n            // so this returns only the user's tenant groups.\n            frappe.call({\n                method: 'frappe.client.get_list',\n                args: {\n                    doctype: 'Supplier Group',\n                    fields: ['name'],\n                    limit_page_length: 0,\n                },\n            }).then((res) => {\n                const names = (res.message || []).map((d) => d.name);\n\n                // The tree root belongs to SYSTEM and is shared.\n                if (!names.includes('All Supplier Groups')) {\n                    names.push('All Supplier Groups');\n                }\n\n                frm.set_query('parent_supplier_group', () => ({\n                    filters: [['name', 'in', names]],\n                }));\n            });\n        });\n    }\n});"
+ },
+ {
+  "doctype": "Client Script",
+  "name": "Item Group Tenant Parents",
+  "dt": "Item Group",
+  "view": "Form",
+  "enabled": 1,
+  "script": "frappe.ui.form.on('Item Group', {\n    refresh(frm) {\n        frappe.call({\n            method: 'songa_multi_tenancy.api.v1.tenants.current_tenant',\n        }).then((r) => {\n            const tenant = r.message;\n            if (!tenant) { return; }\n            frappe.call({\n                method: 'frappe.client.get_list',\n                args: { doctype: 'Item Group', fields: ['name'], limit_page_length: 0 },\n            }).then((res) => {\n                const names = (res.message || []).map((d) => d.name);\n                if (!names.includes('All Item Groups')) { names.push('All Item Groups'); }\n                frm.set_query('parent_item_group', () => ({\n                    filters: [['name', 'in', names]],\n                }));\n            });\n        });\n    }\n});"
+ },
+ {
+  "doctype": "Client Script",
+  "name": "Customer Group Tenant Parents",
+  "dt": "Customer Group",
+  "view": "Form",
+  "enabled": 1,
+  "script": "frappe.ui.form.on('Customer Group', {\n    refresh(frm) {\n        frappe.call({\n            method: 'songa_multi_tenancy.api.v1.tenants.current_tenant',\n        }).then((r) => {\n            const tenant = r.message;\n            if (!tenant) { return; }\n            frappe.call({\n                method: 'frappe.client.get_list',\n                args: { doctype: 'Customer Group', fields: ['name'], limit_page_length: 0 },\n            }).then((res) => {\n                const names = (res.message || []).map((d) => d.name);\n                if (!names.includes('All Customer Groups')) { names.push('All Customer Groups'); }\n                frm.set_query('parent_customer_group', () => ({\n                    filters: [['name', 'in', names]],\n                }));\n            });\n        });\n    }\n});"
  }
 ]
