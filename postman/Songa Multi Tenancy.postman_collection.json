@@ -1,297 +1,667 @@
 {
- "info": {
-  "_postman_id": "b7c772ab-16a4-42d2-a260-5e52bbda4a2c",
-  "name": "Songa Multi Tenancy",
-  "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-  "_exporter_id": "27011734"
- },
- "item": [
-  {
-   "name": "Register Tenant",
-   "request": {
-    "auth": {
-     "type": "noauth"
-    },
-    "method": "POST",
-    "header": [
-     {
-      "key": "Authorization",
-      "value": "{{songa_access_token}}"
-     }
-    ],
-    "body": {
-     "mode": "raw",
-     "raw": "{\r\n  \"songa_tenant_id\": \"SONGA-TENANT-111\",\r\n  \"company\": \"Acmen Corp Kenya Plc\",\r\n  \"tenant_category\": \"Co-operative\",\r\n  \"admin\": {\r\n    \"email\": \"admin@acmecorltd.com\",\r\n    \"phone\": \"+2541234567870\",\r\n    \"full_name\": \"John Murigi\"\r\n  },\r\n    \"selected_songa_modules\": [\r\n    \"Trips\",\r\n    \"Sessions\",\r\n    \"Drivers\"\r\n  ]\r\n}",
-     "options": {
-      "raw": {
-       "language": "json"
-      }
-     }
-    },
-    "url": {
-     "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.api.register_tenant",
-     "host": [
-      "{{Website}}"
-     ],
-     "path": [
-      "api",
-      "method",
-      "songa_multi_tenancy.api.v1.api.register_tenant"
-     ]
-    }
-   },
-   "response": []
+  "info": {
+    "_postman_id": "6ac8585b-5dcf-4ba6-8a52-34c32c8cf821",
+    "name": "Songa Multi Tenancy",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "27011734"
   },
-  {
-   "name": "Check Tenant Status",
-   "request": {
-    "auth": {
-     "type": "noauth"
-    },
-    "method": "GET",
-    "header": [
-     {
-      "key": "Authorization",
-      "value": "{{songa_access_token}}"
-     }
-    ],
-    "body": {
-     "mode": "raw",
-     "raw": "{\r\n  \"songa_tenant_id\": \"SONGA-TENANT-111\",\r\n  \"provisioning_id\": \"4b0028ba8c7becdeab40\"\r\n}",
-     "options": {
-      "raw": {
-       "language": "json"
-      }
-     }
-    },
-    "url": {
-     "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.api.get_tenant_provisioning_status",
-     "host": [
-      "{{Website}}"
-     ],
-     "path": [
-      "api",
-      "method",
-      "songa_multi_tenancy.api.v1.api.get_tenant_provisioning_status"
-     ],
-     "query": [
-      {
-       "key": "Songa_tenant_id",
-       "value": "SONGA-TENANT-01",
-       "disabled": true
+  "item": [
+    {
+      "name": "Register Tenant",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{songa_access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"songa_tenant_id\": \"SONGA-TENANT-111\",\r\n  \"company\": \"Acme Corp Kenya Plc\",\r\n  \"tenant_category\": \"Co-operative\",\r\n  \"admin\": {\r\n    \"email\": \"admin@acmecrltd.com\",\r\n    \"phone\": \"+2541234567870\",\r\n    \"full_name\": \"John Murigi\"\r\n  },\r\n    \"selected_songa_modules\": [\r\n    \"Trips\",\r\n    \"Sessions\",\r\n    \"Drivers\"\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.api.register_tenant",
+          "host": [
+            "{{Website}}"
+          ],
+          "path": [
+            "api",
+            "method",
+            "songa_multi_tenancy.api.v1.api.register_tenant"
+          ]
+        }
       },
-      {
-       "key": "provisioning_id",
-       "value": "fd4c520eba1e1ed288e8",
-       "disabled": true
-      }
-     ]
+      "response": []
+    },
+    {
+      "name": "Check Tenant Status",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{songa_access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"songa_tenant_id\": \"SONGA-TENANT-111\",\r\n    \"provisioning_id\": \"1099bf739ba02fa873d8\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.api.get_tenant_provisioning_status",
+          "host": [
+            "{{Website}}"
+          ],
+          "path": [
+            "api",
+            "method",
+            "songa_multi_tenancy.api.v1.api.get_tenant_provisioning_status"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Suspend Tenant",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{songa_access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"tenant\": \"gb831fs0kf\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.tenants.suspend_tenant",
+          "host": [
+            "{{Website}}"
+          ],
+          "path": [
+            "api",
+            "method",
+            "songa_multi_tenancy.api.v1.tenants.suspend_tenant"
+          ]
+        },
+        "description": "Suspend a tenant: disables memberships and member logins."
+      },
+      "response": []
+    },
+    {
+      "name": "Pause Tenant",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{songa_access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"tenant\": \"gb831fs0kf\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.tenants.pause_tenant",
+          "host": [
+            "{{Website}}"
+          ],
+          "path": [
+            "api",
+            "method",
+            "songa_multi_tenancy.api.v1.tenants.pause_tenant"
+          ]
+        },
+        "description": "Pause a tenant: disables memberships and member logins."
+      },
+      "response": []
+    },
+    {
+      "name": "Activate Tenant",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{songa_access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"tenant\": \"gb831fs0kf\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.tenants.activate_tenant",
+          "host": [
+            "{{Website}}"
+          ],
+          "path": [
+            "api",
+            "method",
+            "songa_multi_tenancy.api.v1.tenants.activate_tenant"
+          ]
+        },
+        "description": "Reactivate a tenant: restores memberships and re-enables member logins."
+      },
+      "response": []
+    },
+    {
+      "name": "Archive Tenant",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{songa_access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"tenant\": \"gb831fs0kf\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.tenants.archive_tenant",
+          "host": [
+            "{{Website}}"
+          ],
+          "path": [
+            "api",
+            "method",
+            "songa_multi_tenancy.api.v1.tenants.archive_tenant"
+          ]
+        },
+        "description": "Archive a tenant: disables memberships and member logins. Data preserved."
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Tenant",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{songa_access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"tenant\": \"gb831fs0kf\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.tenants.delete_tenant",
+          "host": [
+            "{{Website}}"
+          ],
+          "path": [
+            "api",
+            "method",
+            "songa_multi_tenancy.api.v1.tenants.delete_tenant"
+          ]
+        },
+        "description": "Soft-delete a tenant: status becomes Deleted, member users disabled. Data preserved."
+      },
+      "response": []
+    },
+    {
+      "name": "Rename Tenant/ Company",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{songa_access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"doctype\": \"Company\",\r\n    \"old_name\": \"Acme Place LTD\",\r\n    \"new_name\": \"Acme Group Holdings Ltd\",\r\n    \"merge\": false\r\n  }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Website}}/api/method/frappe.client.rename_doc",
+          "host": [
+            "{{Website}}"
+          ],
+          "path": [
+            "api",
+            "method",
+            "frappe.client.rename_doc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Driver",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{songa_access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"tenant\": \"gb831fs0kf\", /** Tenant id for the company **/\r\n  \"company\": \"THE EAST AFRICAN SMART VILLAGES & RURAL MOBILITY LIMITED\", /** Can be any other provisioned cmpany **/\r\n  \"custom_driver_id\": \"1234567\", /** License id**/\r\n  \"custom_supplier_group\": \"Enosaen Drivers\", /** Magena Drivers, Ogembo Drivers, Kilgoris Drivers, Enosaen Drivers, Sotik Drivers, Nyambene Drivers, Kabianga Drivers, Kajiado Drivers **/\r\n  \"cell_number\": \"+254712345678\",\r\n  \"status\": \"Active\" /** Can be Active, Suspended, Left **/\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Website}}/api/resource/driver",
+          "host": [
+            "{{Website}}"
+          ],
+          "path": [
+            "api",
+            "resource",
+            "driver"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Farmer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{songa_access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"tenant\": \"gb831fs0kf\",\r\n    \"company\": \"THE EAST AFRICAN SMART VILLAGES & RURAL MOBILITY LIMITED\",\r\n    \"supplier_group\": \"Enosaen Farmers\",\r\n    \"supplier_type\": \"individual\", /**can be individual, company, partnership**/\r\n    \"supplier_name\": \"John Murigi\",\r\n    \"mobile_no\": \"+254712345678\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Website}}/api/resource/supplier",
+          "host": [
+            "{{Website}}"
+          ],
+          "path": [
+            "api",
+            "resource",
+            "supplier"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Battery Added",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    //Requested Payload with commets extended on problematic attr. by John\n    \"action_type\": \"Battery Added\",\n    \"registration_no\": \"\", // ACE-02-0032. ERPNext doesn't keep battery registration numbers. I think this more of an SMP thing, to ERPNext registration number is the naming series sorted in tag_no below. You will have to generate this on the go,\n    \"tag_no\": \"\", //ACC-ASS-2024-00133\n    \"charger_type\": \"\", // non-canbus or canbus : We do not have this field on ERPNext, charger type and type would basically be categorised as one field, asset category or item category,\n    \"type\": \"\", // Kawi 1.6.1-JK-CH (check https://fleet.songa.mobi/add-battery battery type option for all possible values)\n    \"current_hub_name\": \"\", // Kilgoris Agr-e-hub,\n    \"songa_tenant_id\": \"\", // Apart from provisioning, songa tenant id is not used anywhere else as I mentioned during our meeting. Instead, we can send the company name which is a global unique identifier on all resources.\n\n    //Retained Attributes\n    \"action_type\": \"Battery Added\",\n    \"tag_no\": \"\", // this the naming series, unique on ERPNext,\n    \"type\": \"\", //this we will send Asset Category,\n    \"current_hub_name\": \"\", //this we will send location which is basically the branch,\n    \"company\": \"asset_owner_company\"\n\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.dev.songa.mobi/webhook/erp",
+          "protocol": "https",
+          "host": [
+            "api",
+            "dev",
+            "songa",
+            "mobi"
+          ],
+          "path": [
+            "webhook",
+            "erp"
+          ]
+        },
+        "description": "Outgoing webhook payload sent by the ERPNext Webhook doctype (fixture: webhook.json)."
+      },
+      "response": []
+    },
+    {
+      "name": "Trike Added",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    //Requested Payload with commets extended on problematic attr. by John\n    \"action_type\": \"Trike Added\",\n    \"registration_no\": \"\", // KTWD310K,\n    \"chassis_no\": \"\", // LB79K2216RW900032,\n    \"asset_tag\": \"\", // EASVRM/SON/0615,\n    \"vehicle_type\": \"\", // We do not have this field on ERPNext, vehicle type can categorised as one field, asset category or item category,\n    \"model_type\": \"\", // Model as a field is there but this will most be empty as it's not populated on most asset items\n    \"current_hub_name\": \"\", // Kilgoris Agr-e-hub,\n    \"songa_tenant_id\": \"\", // 238efd55-fb5a-42e5-b4ed-a96be68c58f6 - Apart from provisioning, songa tenant id is not used anywhere else as I mentioned during our meeting. Instead, we can send the company name which is a global unique identifier on all resources.,\n\n\n    //Retained Attributes\n    \"action_type\": \"Trike Added\",\n    \"registration_no\": \"\", //This fields will be registration number\n    \"chassis_no\": \"\", // This will be chassis no field\n    \"asset_tag\": \"\", //This on ERPNext will be the naming series for asset\n    \"current_hub_name\": \"\", // This will be the location or branch field,\n    \"company\": \"asset_owner_company\" // This is what will identify the company the asset belongs to.\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.dev.songa.mobi/webhook/erp",
+          "protocol": "https",
+          "host": [
+            "api",
+            "dev",
+            "songa",
+            "mobi"
+          ],
+          "path": [
+            "webhook",
+            "erp"
+          ]
+        },
+        "description": "Outgoing webhook payload sent by the ERPNext Webhook doctype (fixture: webhook.json)."
+      },
+      "response": []
+    },
+    {
+      "name": "AgriTec Added",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    //Requested Payload with commets extended on problematic attr. by John\n\n    \"action_type\": \"Agri-Tech Added\",\n    \"registration_no\": \"\", // EASVRM/KK/0068,\n    \"model_no\": \"\", // Thresher V2.0 - Model as a field is there but this will most be empty as it's not populated on most asset items\n    \"asset_tag\": \"\", // EASVRM/KK/0068,    \n    \"type\": \"\", //1 (https://fleet.songa.mobi/assets/add-power-africa-asset for Asset Type options), - This field will mostly be asset category unless we decide to handle historical asset data with you asset type categories.\n    \"current_hub_name\": \"\", // Kilgoris Agr-e-hub,\n    \"songa_tenant_id\": \"\", // 238efd55-fb5a-42e5-b4ed-a96be68c58f6 - Apart from provisioning, songa tenant id is not used anywhere else as I mentioned during our meeting. Instead, we can send the company name which is a global unique identifier on all resources.,\n    \n    \n    //Retained Attributes\n    \"action_type\": \"Agri-Tech Added\",\n    \"registration_no\": \"\", //This fields will be registration number\n    \"serial_no\": \"\", // New: This will can be extra info to replace model no.\n    \"asset_tag\": \"\", //This on ERPNext will be the naming series for asset.\n    \"type\": \"\", //This will be asset category options which don't necessary match  songa agri tech types. We should have a conversation about this.\n    \"current_hub_name\": \"\", // This will be the location or branch field,\n    \"company\": \"asset_owner_company\" // This is what will identify the company the asset belongs to.\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.dev.songa.mobi/webhook/erp",
+          "protocol": "https",
+          "host": [
+            "api",
+            "dev",
+            "songa",
+            "mobi"
+          ],
+          "path": [
+            "webhook",
+            "erp"
+          ]
+        },
+        "description": "Outgoing webhook payload sent by the ERPNext Webhook doctype (fixture: webhook.json)."
+      },
+      "response": []
+    },
+    {
+      "name": "Charger Added",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    //Requested Payload with commets extended on problematic attr. by John\n    \"action_type\": \"Charger Added\",\n    \"serial_no\": \"\", // 3069802941-1\n    \"tag_no\": \"\", // EASVRM/SON/0328\n    \"charger_type\": \"\", // canbus or non-canbus similar to Batteries: We do not have this field on ERPNext, charger type and type would basically be categorised as one field, asset category or item category,\n    \"current\": \"\", // for 10Amps use 1 for 12 Amps use 2 for 15 Amps use 3 for 20 Amps use 4 - We do not have this field on ERPNext\n    \"current_hub_name\": \"\", // Kilgoris Agr-e-hub,\n    \"songa_tenant_id\": \"\", // 238efd55-fb5a-42e5-b4ed-a96be68c58f6 Apart from provisioning, songa tenant id is not used anywhere else as I mentioned during our meeting. Instead, we can send the company name which is a global unique identifier on all resources.,\n \n    //Requested Payload with commets extended on problematic attr. by John\n    \"action_type\": \"Charger Added\",\n    \"serial_no\": \"\", // 3069802941-1 - This will be the serial number field on assets\n    \"tag_no\": \"\", // EASVRM/SON/0328 - This will be the naming series field on ERPNext\n    \"current_hub_name\": \"\", // This will be the location or branch field,\n    \"company\": \"asset_owner_company\" // This is what will identify the company the asset belongs to.\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.dev.songa.mobi/webhook/erp",
+          "protocol": "https",
+          "host": [
+            "api",
+            "dev",
+            "songa",
+            "mobi"
+          ],
+          "path": [
+            "webhook",
+            "erp"
+          ]
+        },
+        "description": "Outgoing webhook payload sent by the ERPNext Webhook doctype (fixture: webhook.json)."
+      },
+      "response": []
+    },
+    {
+      "name": "Successful Tenant Provisioning Webhook",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "// Tenant Provisioned Webhooks\n{ \n    //Requested Payload with commets extended on problematic attr. by John\n    \"action_type\": \"Tenant Provisioning Success\",\n    \"songa_tenant_id\": \"\", // 238efd55-fb5a-42e5-b4ed-a96be68c58f6,\n    \"erp_tenant_id\": \"\",\n\n    //Requested Payload with commets extended on problematic attr. by John\n    \"action_type\": \"Tenant Provisioning Success\",\n    \"songa_tenant_id\": \"\", // 238efd55-fb5a-42e5-b4ed-a96be68c58f6,\n    \"erp_tenant_id\": \"\",\n    \"company\": \"\" //Add company name company name: company name is unique on erpnext and it's the base of all transactions.\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.dev.songa.mobi/webhook/erp",
+          "protocol": "https",
+          "host": [
+            "api",
+            "dev",
+            "songa",
+            "mobi"
+          ],
+          "path": [
+            "webhook",
+            "erp"
+          ]
+        },
+        "description": "Outgoing webhook payload sent by the ERPNext Webhook doctype (fixture: webhook.json)."
+      },
+      "response": []
+    },
+    {
+      "name": "Failed Tenant Provisioning Webhook",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "// Tenant Provisioned Webhooks\n{ \n    //Requested Payload with commets extended on problematic attr. by John\n    \"action_type\": \"Tenant Provisioning Failed\",\n    \"songa_tenant_id\": \"\", // 238efd55-fb5a-42e5-b4ed-a96be68c58f6,\n    \"erp_tenant_id\": \"\",\n    \"error_reason\": \"\",\n\n\n    //Requested Payload with commets extended on problematic attr. by John\n    \"action_type\": \"Tenant Provisioning Failed\",\n    \"songa_tenant_id\": \"\", // 238efd55-fb5a-42e5-b4ed-a96be68c58f6,\n    \"erp_tenant_id\": \"\",\n    \"error_reason\": \"\",\n    \"company\": \"\" // Add company name: company name is unique on erpnext and it's the base of all transactions.\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.dev.songa.mobi/webhook/erp",
+          "protocol": "https",
+          "host": [
+            "api",
+            "dev",
+            "songa",
+            "mobi"
+          ],
+          "path": [
+            "webhook",
+            "erp"
+          ]
+        },
+        "description": "Outgoing webhook payload sent by the ERPNext Webhook doctype (fixture: webhook.json)."
+      },
+      "response": []
+    },
+    {
+      "name": "Webhook: Tenant Provisioning Update",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"action_type\": \"Tenant Provisioning Update\",\n  \"status\": \"Completed\",\n  \"songa_tenant_id\": \"238efd55-fb5a-42e5-b4ed-a96be68c58f6\",\n  \"provisioning_id\": \"4b0028ba8c7becdeab40\",\n  \"tenant\": \"gb831fs0kf\",\n  \"company\": \"Acme Kenya\",\n  \"administrator\": \"admin@acme.com\",\n  \"error_message\": \"\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "fleet.songa.mobi/fleet.songa.mobi/api/webhooks/tenant-provisioning",
+          "host": [
+            "fleet",
+            "songa",
+            "mobi"
+          ],
+          "path": [
+            "fleet.songa.mobi",
+            "api",
+            "webhooks",
+            "tenant-provisioning"
+          ]
+        },
+        "description": "Outgoing webhook payload sent by the ERPNext Webhook doctype (fixture: webhook.json)."
+      },
+      "response": []
     }
-   },
-   "response": []
-  },
-  {
-   "name": "Suspend Tenant",
-   "request": {
-    "auth": {
-     "type": "noauth"
+  ],
+  "variable": [
+    {
+      "key": "songa_access_token",
+      "value": ""
     },
-    "method": "POST",
-    "header": [
-     {
-      "key": "Authorization",
-      "value": "{{songa_access_token}}"
-     }
-    ],
-    "body": {
-     "mode": "raw",
-     "raw": "{\r\n  \"tenant\": \"gb831fs0kf\"\r\n}",
-     "options": {
-      "raw": {
-       "language": "json"
-      }
-     }
+    {
+      "key": "Website",
+      "value": ""
     },
-    "description": "Suspend a tenant: disables memberships and member logins.",
-    "url": {
-     "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.tenants.suspend_tenant",
-     "host": [
-      "{{Website}}"
-     ],
-     "path": [
-      "api",
-      "method",
-      "songa_multi_tenancy.api.v1.tenants.suspend_tenant"
-     ]
+    {
+      "key": "local_website",
+      "value": ""
+    },
+    {
+      "key": "local_songa_access_token",
+      "value": ""
     }
-   },
-   "response": []
-  },
-  {
-   "name": "Pause Tenant",
-   "request": {
-    "auth": {
-     "type": "noauth"
-    },
-    "method": "POST",
-    "header": [
-     {
-      "key": "Authorization",
-      "value": "{{songa_access_token}}"
-     }
-    ],
-    "body": {
-     "mode": "raw",
-     "raw": "{\r\n  \"tenant\": \"gb831fs0kf\"\r\n}",
-     "options": {
-      "raw": {
-       "language": "json"
-      }
-     }
-    },
-    "description": "Pause a tenant: disables memberships and member logins.",
-    "url": {
-     "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.tenants.pause_tenant",
-     "host": [
-      "{{Website}}"
-     ],
-     "path": [
-      "api",
-      "method",
-      "songa_multi_tenancy.api.v1.tenants.pause_tenant"
-     ]
-    }
-   },
-   "response": []
-  },
-  {
-   "name": "Activate Tenant",
-   "request": {
-    "auth": {
-     "type": "noauth"
-    },
-    "method": "POST",
-    "header": [
-     {
-      "key": "Authorization",
-      "value": "{{songa_access_token}}"
-     }
-    ],
-    "body": {
-     "mode": "raw",
-     "raw": "{\r\n  \"tenant\": \"gb831fs0kf\"\r\n}",
-     "options": {
-      "raw": {
-       "language": "json"
-      }
-     }
-    },
-    "description": "Reactivate a tenant: restores memberships and re-enables member logins.",
-    "url": {
-     "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.tenants.activate_tenant",
-     "host": [
-      "{{Website}}"
-     ],
-     "path": [
-      "api",
-      "method",
-      "songa_multi_tenancy.api.v1.tenants.activate_tenant"
-     ]
-    }
-   },
-   "response": []
-  },
-  {
-   "name": "Archive Tenant",
-   "request": {
-    "auth": {
-     "type": "noauth"
-    },
-    "method": "POST",
-    "header": [
-     {
-      "key": "Authorization",
-      "value": "{{songa_access_token}}"
-     }
-    ],
-    "body": {
-     "mode": "raw",
-     "raw": "{\r\n  \"tenant\": \"gb831fs0kf\"\r\n}",
-     "options": {
-      "raw": {
-       "language": "json"
-      }
-     }
-    },
-    "description": "Archive a tenant: disables memberships and member logins. Data preserved.",
-    "url": {
-     "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.tenants.archive_tenant",
-     "host": [
-      "{{Website}}"
-     ],
-     "path": [
-      "api",
-      "method",
-      "songa_multi_tenancy.api.v1.tenants.archive_tenant"
-     ]
-    }
-   },
-   "response": []
-  },
-  {
-   "name": "Delete Tenant",
-   "request": {
-    "auth": {
-     "type": "noauth"
-    },
-    "method": "POST",
-    "header": [
-     {
-      "key": "Authorization",
-      "value": "{{songa_access_token}}"
-     }
-    ],
-    "body": {
-     "mode": "raw",
-     "raw": "{\r\n  \"tenant\": \"gb831fs0kf\"\r\n}",
-     "options": {
-      "raw": {
-       "language": "json"
-      }
-     }
-    },
-    "description": "Soft-delete a tenant: status becomes Deleted, member users disabled. Data preserved.",
-    "url": {
-     "raw": "{{Website}}/api/method/songa_multi_tenancy.api.v1.tenants.delete_tenant",
-     "host": [
-      "{{Website}}"
-     ],
-     "path": [
-      "api",
-      "method",
-      "songa_multi_tenancy.api.v1.tenants.delete_tenant"
-     ]
-    }
-   },
-   "response": []
-  }
- ],
- "variable": [
-  {
-   "key": "songa_access_token",
-   "value": ""
-  },
-  {
-   "key": "Website",
-   "value": ""
-  },
-  {
-   "key": "local_website",
-   "value": ""
-  },
-  {
-   "key": "local_songa_access_token",
-   "value": ""
-  }
- ]
+  ]
 }
